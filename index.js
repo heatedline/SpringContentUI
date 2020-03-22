@@ -1,21 +1,60 @@
 $(document).ready(function() {
 	
+	$("#videoModal").draggable({
+	      handle: ".modal-header"
+	});
+
+	$('#videoModal').on('shown.bs.modal', function () {
+	  $('#video1')[0].play();
+	});
+
+	$('#videoModal').on('hidden.bs.modal', function () {
+	  $('#video1')[0].pause();
+	});
+	
 	$.ajax({
 		type : 'GET',
 		async : true,
-		url : "http://localhost:8080/springContent/getFiles",
+		url : serviceIP + "getFiles",
 		dataType : 'json',
 		contentType : 'application/json',
 		success : function(files) {
 			$("#idFileList").empty();
 			$.each(files, function (index, file) {
-				$("#idFileList").append('<tr>' +
-								'<td>' + file.name +  '</td>' +
-	 							'<td>' + file.contentLength + '</td>' +
-	 							'<td>' + file.created + '</td>' +
-	 							'<td>' + file.summary + '</td>' +
-								'</tr>');
+				var type;
+				if(file.mimeType == "audio/mp3") {
+					type = "audio/mpeg";
+					$("#idFileList").append('<tr>' +
+							'<td>' + file.name +  '</td>' +
+ 							'<td>' + file.contentLength + '</td>' +
+ 							'<td>' + file.created + '</td>' +
+ 							'<td>' + file.summary + '</td>' +
+ 							'<td> <audio controls><source src=' + serviceIP + 'files/' + file.id + ' type=' + type + '></audio> </td>' +
+							'</tr>');
+				} else if(file.mimeType == "video/mp4"){
+					$("#idFileList").append('<tr>' +
+							'<td>' + file.name +  '</td>' +
+ 							'<td>' + file.contentLength + '</td>' +
+ 							'<td>' + file.created + '</td>' +
+ 							'<td>' + file.summary + '</td>' +
+ 							'<td> <a onclick="playVideo('+ file.id + ')" class="anchorButton" data-toggle="modal" data-target="#videoModal">&#9658;</a> </td>' +
+							'</tr>');
+				} else {
+					$("#idFileList").append('<tr>' +
+							'<td>' + file.name +  '</td>' +
+ 							'<td>' + file.contentLength + '</td>' +
+ 							'<td>' + file.created + '</td>' +
+ 							'<td>' + file.summary + '</td>' +
+ 							'<td> NA </td>' +
+							'</tr>');
+				}
 			});
+			
+			$("audio").on("play", function() {
+		        $("audio").not(this).each(function(index, audio) {
+		            audio.pause();
+		        });
+		    });
 		},
 		error : function(error) {
 			console.log(error);
@@ -43,7 +82,7 @@ $(document).ready(function() {
 			type : "POST",
 			data : fileData,
 			dataType : 'json',
-			url : "http://localhost:8080/springContent/saveFile",
+			url : serviceIP + "saveFile",
 			contentType : "application/json; charset=utf-8",
 			success : function(resp) {
 				console.log(resp);
@@ -54,7 +93,7 @@ $(document).ready(function() {
 				$.ajax({
 					type : "POST",
 					enctype : 'multipart/form-data',
-					url : "http://localhost:8080/springContent/setContent",
+					url : serviceIP + "setContent",
 					data : fd,
 					processData : false, // prevent jQuery from automatically
 					// transforming the data into a query string
@@ -65,19 +104,46 @@ $(document).ready(function() {
 						$.ajax({
 							type : 'GET',
 							async : true,
-							url : "http://localhost:8080/springContent/getFiles",
+							url : serviceIP + "getFiles",
 							dataType : 'json',
 							contentType : 'application/json',
 							success : function(files) {
 								$("#idFileList").empty();
 								$.each(files, function (index, file) {
-									$("#idFileList").append('<tr>' +
-											'<td>' + file.name +  '</td>' +
-				 							'<td>' + file.contentLength + '</td>' +
-				 							'<td>' + file.created + '</td>' +
-				 							'<td>' + file.summary + '</td>' +
-											'</tr>');
+									var type;
+									if(file.mimeType == "audio/mp3") {
+										type = "audio/mpeg";
+										$("#idFileList").append('<tr>' +
+												'<td>' + file.name +  '</td>' +
+					 							'<td>' + file.contentLength + '</td>' +
+					 							'<td>' + file.created + '</td>' +
+					 							'<td>' + file.summary + '</td>' +
+					 							'<td> <audio controls><source src=' + serviceIP + 'files/' + file.id + ' type=' + type + '></audio> </td>' +
+												'</tr>');
+									} else if(file.mimeType == "video/mp4"){
+										$("#idFileList").append('<tr>' +
+												'<td>' + file.name +  '</td>' +
+					 							'<td>' + file.contentLength + '</td>' +
+					 							'<td>' + file.created + '</td>' +
+					 							'<td>' + file.summary + '</td>' +
+					 							'<td> <a onclick="playVideo('+ file.id + ')" class="anchorButton" data-toggle="modal" data-target="#videoModal">&#9658;</a> </td>' +
+												'</tr>');
+									} else {
+										$("#idFileList").append('<tr>' +
+												'<td>' + file.name +  '</td>' +
+					 							'<td>' + file.contentLength + '</td>' +
+					 							'<td>' + file.created + '</td>' +
+					 							'<td>' + file.summary + '</td>' +
+					 							'<td> NA </td>' +
+												'</tr>');
+									}
 								});
+								
+								$("audio").on("play", function() {
+							        $("audio").not(this).each(function(index, audio) {
+							            audio.pause();
+							        });
+							    });
 							},
 							error : function(error) {
 								console.log(error);
@@ -95,5 +161,85 @@ $(document).ready(function() {
 		});
 
 	});
+	
 
+	$('#idSearchField').keypress(function(event){
+		var keycode = (event.keyCode ? event.keyCode : event.which);
+		if(keycode == '13'){
+			if($(this).val() != "") {
+				$.ajax({
+					type : 'GET',
+					async : true,
+					url : serviceIP + "search?searchTerm=" + $(this).val(),
+					dataType : 'json',
+					contentType : 'application/json',
+					success : function(files) {
+						$("#idFileList").empty();
+						$.each(files, function (index, file) {
+							var type;
+							if(file.mimeType == "audio/mp3") {
+								type = "audio/mpeg";
+								$("#idFileList").append('<tr>' +
+										'<td>' + file.name +  '</td>' +
+			 							'<td>' + file.contentLength + '</td>' +
+			 							'<td>' + file.created + '</td>' +
+			 							'<td>' + file.summary + '</td>' +
+			 							'<td> <audio controls><source src=' + serviceIP + 'files/' + file.id + ' type=' + type + '></audio> </td>' +
+										'</tr>');
+							} else if(file.mimeType == "video/mp4"){
+								$("#idFileList").append('<tr>' +
+										'<td>' + file.name +  '</td>' +
+			 							'<td>' + file.contentLength + '</td>' +
+			 							'<td>' + file.created + '</td>' +
+			 							'<td>' + file.summary + '</td>' +
+			 							'<td> <a onclick="playVideo('+ file.id + ')" class="anchorButton" data-toggle="modal" data-target="#videoModal">&#9658;</a> </td>' +
+										'</tr>');
+							} else {
+								$("#idFileList").append('<tr>' +
+										'<td>' + file.name +  '</td>' +
+			 							'<td>' + file.contentLength + '</td>' +
+			 							'<td>' + file.created + '</td>' +
+			 							'<td>' + file.summary + '</td>' +
+			 							'<td> NA </td>' +
+										'</tr>');
+							}
+						});
+						
+						$("audio").on("play", function() {
+					        $("audio").not(this).each(function(index, audio) {
+					            audio.pause();
+					        });
+					    });
+					},
+					error : function(error) {
+						console.log(error);
+					}
+				});
+			} else {
+				alert("Search parameter cannot be empty!");
+			}
+		}
+		event.stopPropagation();
+	});
+	
+	
 });
+
+function searchToggle(obj, evt){
+    var container = $(obj).closest('.search-wrapper');
+    if(!container.hasClass('active')){
+        container.addClass('active');
+        evt.preventDefault();
+    } else if(container.hasClass('active') && $(obj).closest('.input-holder').length == 0){
+        container.removeClass('active');
+        // clear input
+        container.find('.search-input').val('');
+    }
+}
+
+function playVideo(id) {
+	$("#idVideoModalBody").html('');
+	$('<video controls id="video1" style="width: 100%; height: auto; margin: 0 auto; frameborder: 0;"> ' +
+			 '<source src=' + serviceIP + 'files/' + id + ' type="video/mp4"> ' +
+		  '</video>').appendTo("#idVideoModalBody");
+}

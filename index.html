@@ -13,19 +13,31 @@
 	crossorigin="anonymous">
 
 <link rel="stylesheet" href="Common/assets/css/style.css">
+<link rel="stylesheet" href="Common/assets/css/search.css">
 
 <title>Spring Content With Apache Solr</title>
 </head>
 <body>
-	<br />
-	<br />
+	<br/>
+	<br/>
+	<div class="search-wrapper">
+		<div class="input-holder">
+			<input type="text" class="search-input" id="idSearchField" placeholder="Type to search" />
+			<button class="search-icon" onclick="searchToggle(this, event);">
+				<span></span>
+			</button>
+		</div>
+		<span class="close" onclick="searchToggle(this, event);"></span>
+	</div>
+	<br/>
 	<div class="container">
 		<form action="#" id="idFileUploadForm">
 			<div class="form-group">
 				<div class="custom-file">
 					<label class="custom-file-label" for="customFile"><i
 						class="fa fa-cloud-upload"></i> Select a file:</label> <input type="file"
-						class="custom-file-input" id="customFile" name="file" style="display:none;">
+						class="custom-file-input" id="customFile" name="file"
+						style="display: none;">
 				</div>
 				<br /> <br />
 				<div class="form-group">
@@ -33,10 +45,10 @@
 						placeholder="Summary" rows="3"></textarea>
 				</div>
 				<button type="button" class="btn btn-primary" id="idSubmit">Submit</button>
+				<button type="button" class="btn btn-primary" id="idReset" onclick="location.reload();">Reset</button>
 			</div>
 		</form>
 	</div>
-	<br />
 	<table width="100%" class="table table-hover">
 		<thead>
 			<tr>
@@ -44,16 +56,40 @@
 				<th>Length</th>
 				<th>Created</th>
 				<th>Summary</th>
+				<th>Play/Pause</th>
 			</tr>
 		</thead>
 		<tbody id="idFileList">
 		</tbody>
 	</table>
 
+	<!-- Modal -->
+	<div class="modal fade" id="videoModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Video</h4>
+				</div>
+				<div class="modal-body" id="idVideoModalBody">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script type="text/javascript" src="Common/assets/js-library/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript"
+		src="Common/assets/js-library/jquery-3.4.1.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
 		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
@@ -63,6 +99,7 @@
 		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 		crossorigin="anonymous"></script>
 	<script type="text/javascript" src="jquery.serializeToJSON.js"></script>
+	<script type="text/javascript" src="Common/assets/js/mySpringContent_global.js"></script>
 	<script src="index.js"></script>
 </body>
 </html>
