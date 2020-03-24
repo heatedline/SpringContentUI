@@ -1,5 +1,11 @@
 $(document).ready(function() {
 	
+	$('#dropbox').dropbox({
+		onDrop: function(files) {
+			console.log(files);
+		}
+	});
+	
 	$("#videoModal").draggable({
 	      handle: ".modal-header"
 	});
