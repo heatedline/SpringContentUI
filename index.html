@@ -33,7 +33,6 @@
 	<div class="container">
 		<form action="#" id="idFileUploadForm">
 			<div class="form-group">
-				<div id="dropbox">Drag and drop file here to upload them</div>
 				<div class="custom-file">
 					<label class="custom-file-label" for="customFile"><i
 						class="fa fa-cloud-upload"></i> Select a file:</label> <input type="file"
@@ -50,6 +49,7 @@
 			</div>
 		</form>
 	</div>
+	<img id="idImage" src="http://localhost:8080/springContent/renderToImage?fileId=9"/>
 	<table width="100%" class="table table-hover">
 		<thead>
 			<tr>
@@ -64,7 +64,7 @@
 		</tbody>
 	</table>
 
-	<!-- Modal -->
+	<!-- Video Modal -->
 	<div class="modal fade" id="videoModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
@@ -77,6 +77,27 @@
 					</button>
 				</div>
 				<div class="modal-body" id="idVideoModalBody">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Document Modal -->
+	<div class="modal fade" id="docModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Document</h4>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="idDocModalBody">
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -102,6 +123,7 @@
 	<script type="text/javascript" src="jquery.serializeToJSON.js"></script>
 	<script type="text/javascript" src="Common/assets/js/mySpringContent_global.js"></script>
 	<script type="text/javascript" src="Common/assets/js-library/jquery.dropbox.js"></script>
+	<script type="text/javascript" src="Common/assets/js-library/pdfobject.min.js"></script>
 	<script src="index.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	
-	$('#dropbox').dropbox({
+	$('body').dropbox({
 		onDrop: function(files) {
 			console.log(files);
 		}
@@ -35,7 +35,7 @@ $(document).ready(function() {
  							'<td>' + file.contentLength + '</td>' +
  							'<td>' + file.created + '</td>' +
  							'<td>' + file.summary + '</td>' +
- 							'<td> <audio controls><source src=' + serviceIP + 'files/' + file.id + ' type=' + type + '></audio> </td>' +
+ 							'<td> <audio controls><source src=' + serviceIP + 'audioVideoFiles/' + file.id + ' type=' + type + '></audio> </td>' +
 							'</tr>');
 				} else if(file.mimeType == "video/mp4"){
 					$("#idFileList").append('<tr>' +
@@ -51,7 +51,7 @@ $(document).ready(function() {
  							'<td>' + file.contentLength + '</td>' +
  							'<td>' + file.created + '</td>' +
  							'<td>' + file.summary + '</td>' +
- 							'<td> NA </td>' +
+ 							'<td> <button type="button" class="btn btn-primary" onclick="openDocModal(' + file.id + ')" data-toggle="modal" data-target="#docModal">Open</button> </td>' +
 							'</tr>');
 				}
 			});
@@ -124,7 +124,7 @@ $(document).ready(function() {
 					 							'<td>' + file.contentLength + '</td>' +
 					 							'<td>' + file.created + '</td>' +
 					 							'<td>' + file.summary + '</td>' +
-					 							'<td> <audio controls><source src=' + serviceIP + 'files/' + file.id + ' type=' + type + '></audio> </td>' +
+					 							'<td> <audio controls><source src=' + serviceIP + 'audioVideoFiles/' + file.id + ' type=' + type + '></audio> </td>' +
 												'</tr>');
 									} else if(file.mimeType == "video/mp4"){
 										$("#idFileList").append('<tr>' +
@@ -190,7 +190,7 @@ $(document).ready(function() {
 			 							'<td>' + file.contentLength + '</td>' +
 			 							'<td>' + file.created + '</td>' +
 			 							'<td>' + file.summary + '</td>' +
-			 							'<td> <audio controls><source src=' + serviceIP + 'files/' + file.id + ' type=' + type + '></audio> </td>' +
+			 							'<td> <audio controls><source src=' + serviceIP + 'audioVideoFiles/' + file.id + ' type=' + type + '></audio> </td>' +
 										'</tr>');
 							} else if(file.mimeType == "video/mp4"){
 								$("#idFileList").append('<tr>' +
@@ -246,6 +246,11 @@ function searchToggle(obj, evt){
 function playVideo(id) {
 	$("#idVideoModalBody").html('');
 	$('<video controls id="video1" style="width: 100%; height: auto; margin: 0 auto; frameborder: 0;"> ' +
-			 '<source src=' + serviceIP + 'files/' + id + ' type="video/mp4"> ' +
-		  '</video>').appendTo("#idVideoModalBody");
+			'<source src=' + serviceIP + 'audioVideoFiles/' + id + ' type="video/mp4"> ' +
+	  '</video>').appendTo("#idVideoModalBody");
+}
+
+function openDocModal(id) {
+	$("#idDocModalBody").html('');
+	PDFObject.embed(serviceIP + "documentFiles/" + id, "#idDocModalBody");
 }

@@ -63,3 +63,16 @@
 	color: #FFF;
 }
 
+img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+}
+
+.pdfobject-container { 
+	height: 30rem; 
+	border: 1rem solid rgba(0,0,0,.1); 
+}
+
+
