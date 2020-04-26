@@ -7,14 +7,13 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-	crossorigin="anonymous">
+<link rel="stylesheet" href="Common/assets/css-library/bootstrap.min.css">
 
 <link rel="stylesheet" href="Common/assets/css/style.css">
 <link rel="stylesheet" href="Common/assets/css/search.css">
-
+<!-- <link href="Common/assets/css/fileinput.css" media="all" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
+<link href="Common/assets/theme/explorer-fas/theme.css" media="all" rel="stylesheet" type="text/css"> -->
 <title>Spring Content With Apache Solr</title>
 </head>
 <body>
@@ -30,6 +29,13 @@
 		<span class="close" onclick="searchToggle(this, event);"></span>
 	</div>
 	<br/>
+
+	<div id="drop-target">Drop your files or folders (Chrome >= 21)
+		here</div>
+
+	<div id="debug">No runtime found, your browser doesn't support
+		HTML5 drag &amp; drop upload.</div>
+
 	<div class="container">
 		<form action="#" id="idFileUploadForm">
 			<div class="form-group">
@@ -49,14 +55,14 @@
 			</div>
 		</form>
 	</div>
-	<img id="idImage" src="http://localhost:8080/springContent/renderToImage?fileId=9"/>
+
+	<!-- <img id="idImage" src="http://localhost:8080/springContent/renderToImage?fileId=9"/> -->
 	<table width="100%" class="table table-hover">
 		<thead>
 			<tr>
 				<th>Name</th>
 				<th>Length</th>
 				<th>Created</th>
-				<th>Summary</th>
 				<th>Play/Pause</th>
 			</tr>
 		</thead>
@@ -76,15 +82,14 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body" id="idVideoModalBody">
-				</div>
+				<div class="modal-body" id="idVideoModalBody"></div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- Document Modal -->
 	<div class="modal fade" id="docModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
@@ -97,8 +102,7 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body" id="idDocModalBody">
-				</div>
+				<div class="modal-body" id="idDocModalBody"></div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
@@ -106,24 +110,30 @@
 		</div>
 	</div>
 
-	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script type="text/javascript"
 		src="Common/assets/js-library/jquery-3.4.1.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-		crossorigin="anonymous"></script>
+	<script type="text/javascript"
+		src="Common/assets/js-library/jquery-ui.min.js"></script>
+	<script type="text/javascript"
+		src="Common/assets/js-library/popper.min.js"></script>
+	<script type="text/javascript"
+		src="Common/assets/js-library/bootstrap.min.js"></script>
 	<script type="text/javascript" src="jquery.serializeToJSON.js"></script>
-	<script type="text/javascript" src="Common/assets/js/mySpringContent_global.js"></script>
-	<script type="text/javascript" src="Common/assets/js-library/jquery.dropbox.js"></script>
-	<script type="text/javascript" src="Common/assets/js-library/pdfobject.min.js"></script>
+	<script type="text/javascript"
+		src="Common/assets/js/mySpringContent_global.js"></script>
+	<!-- <script type="text/javascript" src="Common/assets/js-library/jquery.dropbox.js"></script> -->
+	<!-- <script type="text/javascript" src="Common/assets/js-library/plugins/piexif.js"></script>
+	<script type="text/javascript" src="Common/assets/js-library/plugins/purify.js"></script>
+	<script type="text/javascript" src="Common/assets/js-library/plugins/sortable.js"></script>
+	<script type="text/javascript" src="Common/assets/js-library/fileinput.js"></script>
+	<script type="text/javascript" src="Common/assets/theme/fas/theme.js"></script>
+	<script type="text/javascript" src="Common/assets/theme/explorer-fas/theme.js"></script> -->
+	<script type="text/javascript"
+		src="Common/assets/js-library/plupload.full.min.js"></script>
+	<script type="text/javascript"
+		src="Common/assets/js-library/pdfobject.min.js"></script>
 	<script src="index.js"></script>
+	<script type="text/javascript" src="Common/assets/js/uploader.js"></script>
 </body>
 </html>

@@ -1,11 +1,5 @@
 $(document).ready(function() {
 	
-	$('body').dropbox({
-		onDrop: function(files) {
-			console.log(files);
-		}
-	});
-	
 	$("#videoModal").draggable({
 	      handle: ".modal-header"
 	});
@@ -34,7 +28,6 @@ $(document).ready(function() {
 							'<td>' + file.name +  '</td>' +
  							'<td>' + file.contentLength + '</td>' +
  							'<td>' + file.created + '</td>' +
- 							'<td>' + file.summary + '</td>' +
  							'<td> <audio controls><source src=' + serviceIP + 'audioVideoFiles/' + file.id + ' type=' + type + '></audio> </td>' +
 							'</tr>');
 				} else if(file.mimeType == "video/mp4"){
@@ -42,7 +35,6 @@ $(document).ready(function() {
 							'<td>' + file.name +  '</td>' +
  							'<td>' + file.contentLength + '</td>' +
  							'<td>' + file.created + '</td>' +
- 							'<td>' + file.summary + '</td>' +
  							'<td> <a onclick="playVideo('+ file.id + ')" class="anchorButton" data-toggle="modal" data-target="#videoModal">&#9658;</a> </td>' +
 							'</tr>');
 				} else {
@@ -50,7 +42,6 @@ $(document).ready(function() {
 							'<td>' + file.name +  '</td>' +
  							'<td>' + file.contentLength + '</td>' +
  							'<td>' + file.created + '</td>' +
- 							'<td>' + file.summary + '</td>' +
  							'<td> <button type="button" class="btn btn-primary" onclick="openDocModal(' + file.id + ')" data-toggle="modal" data-target="#docModal">Open</button> </td>' +
 							'</tr>');
 				}
@@ -72,13 +63,12 @@ $(document).ready(function() {
 		var file = $('#customFile')[0].files[0].name;
 		$(this).prev('label').text(file);
 	});
-
+	
 	$("#idSubmit").off().on('click', function() {
 
 		var f = $('input[type=file]')[0].files[0];
 		var file = {
-			name : f.name,
-			summary : $("#summary").val()
+			name : f.name
 		};
 
 		var fileData = JSON.stringify(file);
@@ -123,7 +113,6 @@ $(document).ready(function() {
 												'<td>' + file.name +  '</td>' +
 					 							'<td>' + file.contentLength + '</td>' +
 					 							'<td>' + file.created + '</td>' +
-					 							'<td>' + file.summary + '</td>' +
 					 							'<td> <audio controls><source src=' + serviceIP + 'audioVideoFiles/' + file.id + ' type=' + type + '></audio> </td>' +
 												'</tr>');
 									} else if(file.mimeType == "video/mp4"){
@@ -131,7 +120,6 @@ $(document).ready(function() {
 												'<td>' + file.name +  '</td>' +
 					 							'<td>' + file.contentLength + '</td>' +
 					 							'<td>' + file.created + '</td>' +
-					 							'<td>' + file.summary + '</td>' +
 					 							'<td> <a onclick="playVideo('+ file.id + ')" class="anchorButton" data-toggle="modal" data-target="#videoModal">&#9658;</a> </td>' +
 												'</tr>');
 									} else {
@@ -139,7 +127,6 @@ $(document).ready(function() {
 												'<td>' + file.name +  '</td>' +
 					 							'<td>' + file.contentLength + '</td>' +
 					 							'<td>' + file.created + '</td>' +
-					 							'<td>' + file.summary + '</td>' +
 					 							'<td> NA </td>' +
 												'</tr>');
 									}
@@ -189,7 +176,6 @@ $(document).ready(function() {
 										'<td>' + file.name +  '</td>' +
 			 							'<td>' + file.contentLength + '</td>' +
 			 							'<td>' + file.created + '</td>' +
-			 							'<td>' + file.summary + '</td>' +
 			 							'<td> <audio controls><source src=' + serviceIP + 'audioVideoFiles/' + file.id + ' type=' + type + '></audio> </td>' +
 										'</tr>');
 							} else if(file.mimeType == "video/mp4"){
@@ -197,7 +183,6 @@ $(document).ready(function() {
 										'<td>' + file.name +  '</td>' +
 			 							'<td>' + file.contentLength + '</td>' +
 			 							'<td>' + file.created + '</td>' +
-			 							'<td>' + file.summary + '</td>' +
 			 							'<td> <a onclick="playVideo('+ file.id + ')" class="anchorButton" data-toggle="modal" data-target="#videoModal">&#9658;</a> </td>' +
 										'</tr>');
 							} else {
@@ -205,7 +190,6 @@ $(document).ready(function() {
 										'<td>' + file.name +  '</td>' +
 			 							'<td>' + file.contentLength + '</td>' +
 			 							'<td>' + file.created + '</td>' +
-			 							'<td>' + file.summary + '</td>' +
 			 							'<td> NA </td>' +
 										'</tr>');
 							}
@@ -230,6 +214,24 @@ $(document).ready(function() {
 	
 	
 });
+
+function traverseFileTree(item, path) {
+	  path = path || "";
+	  if (item.isFile) {
+	    // Get file
+	    item.file(function(file) {
+	      console.log("File:", path + file.name);
+	    });
+	  } else if (item.isDirectory) {
+	    // Get folder contents
+	    var dirReader = item.createReader();
+	    dirReader.readEntries(function(entries) {
+	      for (var i=0; i<entries.length; i++) {
+	        traverseFileTree(entries[i], path + item.name + "/");
+	      }
+	    });
+	  }
+	}
 
 function searchToggle(obj, evt){
     var container = $(obj).closest('.search-wrapper');
