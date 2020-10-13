@@ -22,7 +22,7 @@ $(document).ready(function() {
 			$("#idFileList").empty();
 			$.each(files, function (index, file) {
 				var type;
-				if(file.mimeType == "audio/mp3") {
+				if(file.mimeType == "audio/mp3" || file.mimeType == "audio/mpeg") {
 					type = "audio/mpeg";
 					$("#idFileList").append('<tr>' +
 							'<td>' + file.name +  '</td>' +
@@ -107,7 +107,7 @@ $(document).ready(function() {
 								$("#idFileList").empty();
 								$.each(files, function (index, file) {
 									var type;
-									if(file.mimeType == "audio/mp3") {
+									if(file.mimeType == "audio/mp3" || file.mimeType == "audio/mpeg") {
 										type = "audio/mpeg";
 										$("#idFileList").append('<tr>' +
 												'<td>' + file.name +  '</td>' +
@@ -127,7 +127,7 @@ $(document).ready(function() {
 												'<td>' + file.name +  '</td>' +
 					 							'<td>' + file.contentLength + '</td>' +
 					 							'<td>' + file.created + '</td>' +
-					 							'<td> NA </td>' +
+					 							'<td> <button type="button" class="btn btn-primary" onclick="openDocModal(' + file.id + ')" data-toggle="modal" data-target="#docModal">Open</button> </td>' +
 												'</tr>');
 									}
 								});
