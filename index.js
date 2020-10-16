@@ -12,6 +12,10 @@ $(document).ready(function() {
 	  $('#video1')[0].pause();
 	});
 	
+	$("#docModal").draggable({
+	      handle: ".modal-header"
+	});
+	
 	$.ajax({
 		type : 'GET',
 		async : true,
@@ -28,23 +32,82 @@ $(document).ready(function() {
 							'<td>' + file.name +  '</td>' +
  							'<td>' + file.contentLength + '</td>' +
  							'<td>' + file.created + '</td>' +
+ 							'<td>heatedline</td>' +
  							'<td> <audio controls><source src=' + serviceIP + 'audioVideoFiles/' + file.id + ' type=' + type + '></audio> </td>' +
+ 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
 							'</tr>');
+					var btn = document.getElementById("idDownloadBtn" + index);
+	    			btn.addEventListener("click", function() { 
+	    				downloadFile(files[index])
+	    			});
 				} else if(file.mimeType == "video/mp4"){
 					$("#idFileList").append('<tr>' +
 							'<td>' + file.name +  '</td>' +
  							'<td>' + file.contentLength + '</td>' +
  							'<td>' + file.created + '</td>' +
+ 							'<td>heatedline</td>' +
  							'<td> <a onclick="playVideo('+ file.id + ')" class="anchorButton" data-toggle="modal" data-target="#videoModal">&#9658;</a> </td>' +
+ 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
 							'</tr>');
-				} else {
+					var btn = document.getElementById("idDownloadBtn" + index);
+	    			btn.addEventListener("click", function() { 
+	    				downloadFile(files[index])
+	    			});
+				} else if(file.mimeType == "application/pdf") {
 					$("#idFileList").append('<tr>' +
 							'<td>' + file.name +  '</td>' +
  							'<td>' + file.contentLength + '</td>' +
  							'<td>' + file.created + '</td>' +
- 							'<td> <button type="button" class="btn btn-primary" onclick="openDocModal(' + file.id + ')" data-toggle="modal" data-target="#docModal">Open</button> </td>' +
+ 							'<td>heatedline</td>' +
+ 							'<td> <button type="button" class="btn btn-primary" onclick="openPDFModal(' + file.id + ')">Open</button> </td>' +
+ 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
 							'</tr>');
+					var btn = document.getElementById("idDownloadBtn" + index);
+	    			btn.addEventListener("click", function() { 
+	    				downloadFile(files[index])
+	    			});
+				} else if(file.mimeType == "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
+					$("#idFileList").append('<tr>' +
+							'<td>' + file.name +  '</td>' +
+ 							'<td>' + file.contentLength + '</td>' +
+ 							'<td>' + file.created + '</td>' +
+ 							'<td>heatedline</td>' +
+ 							'<td> <button type="button" class="btn btn-primary" onclick="openDocModal(' + file.id + ')">Open</button> </td>' +
+ 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
+							'</tr>');
+					var btn = document.getElementById("idDownloadBtn" + index);
+	    			btn.addEventListener("click", function() { 
+	    				downloadFile(files[index])
+	    			});
+				} else if(file.mimeType == "text/plain") {
+					$("#idFileList").append('<tr>' +
+							'<td>' + file.name +  '</td>' +
+ 							'<td>' + file.contentLength + '</td>' +
+ 							'<td>' + file.created + '</td>' +
+ 							'<td>heatedline</td>' +
+ 							'<td> <button type="button" class="btn btn-primary" onclick="openPDFModal(' + file.id + ')">Open</button> </td>' +
+ 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
+							'</tr>');
+					var btn = document.getElementById("idDownloadBtn" + index);
+	    			btn.addEventListener("click", function() { 
+	    				downloadFile(files[index])
+	    			});
+				} else if(file.mimeType == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
+					$("#idFileList").append('<tr>' +
+							'<td>' + file.name +  '</td>' +
+ 							'<td>' + file.contentLength + '</td>' +
+ 							'<td>' + file.created + '</td>' +
+ 							'<td>heatedline</td>' +
+ 							'<td>NA</td>' +
+ 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
+							'</tr>');
+					var btn = document.getElementById("idDownloadBtn" + index);
+	    			btn.addEventListener("click", function() { 
+	    				downloadFile(files[index])
+	    			});
 				}
+				
+				
 			});
 			
 			$("audio").on("play", function() {
@@ -113,22 +176,79 @@ $(document).ready(function() {
 												'<td>' + file.name +  '</td>' +
 					 							'<td>' + file.contentLength + '</td>' +
 					 							'<td>' + file.created + '</td>' +
+					 							'<td>heatedline</td>' +
 					 							'<td> <audio controls><source src=' + serviceIP + 'audioVideoFiles/' + file.id + ' type=' + type + '></audio> </td>' +
+					 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
 												'</tr>');
+										var btn = document.getElementById("idDownloadBtn" + index);
+						    			btn.addEventListener("click", function() { 
+						    				downloadFile(files[index])
+						    			});
 									} else if(file.mimeType == "video/mp4"){
 										$("#idFileList").append('<tr>' +
 												'<td>' + file.name +  '</td>' +
 					 							'<td>' + file.contentLength + '</td>' +
 					 							'<td>' + file.created + '</td>' +
+					 							'<td>heatedline</td>' +
 					 							'<td> <a onclick="playVideo('+ file.id + ')" class="anchorButton" data-toggle="modal" data-target="#videoModal">&#9658;</a> </td>' +
+					 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
 												'</tr>');
-									} else {
+										var btn = document.getElementById("idDownloadBtn" + index);
+						    			btn.addEventListener("click", function() { 
+						    				downloadFile(files[index])
+						    			});
+									} else if(file.mimeType == "application/pdf") {
 										$("#idFileList").append('<tr>' +
 												'<td>' + file.name +  '</td>' +
 					 							'<td>' + file.contentLength + '</td>' +
 					 							'<td>' + file.created + '</td>' +
-					 							'<td> <button type="button" class="btn btn-primary" onclick="openDocModal(' + file.id + ')" data-toggle="modal" data-target="#docModal">Open</button> </td>' +
+					 							'<td>heatedline</td>' +
+					 							'<td> <button type="button" class="btn btn-primary" onclick="openPDFModal(' + file.id + ')">Open</button> </td>' +
+					 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
 												'</tr>');
+										var btn = document.getElementById("idDownloadBtn" + index);
+						    			btn.addEventListener("click", function() { 
+						    				downloadFile(files[index])
+						    			});
+									} else if(file.mimeType == "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
+										$("#idFileList").append('<tr>' +
+												'<td>' + file.name +  '</td>' +
+					 							'<td>' + file.contentLength + '</td>' +
+					 							'<td>' + file.created + '</td>' +
+					 							'<td>heatedline</td>' +
+					 							'<td> <button type="button" class="btn btn-primary" onclick="openDocModal(' + file.id + ')">Open</button> </td>' +
+					 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
+												'</tr>');
+										var btn = document.getElementById("idDownloadBtn" + index);
+						    			btn.addEventListener("click", function() { 
+						    				downloadFile(files[index])
+						    			});
+									} else if(file.mimeType == "text/plain") {
+										$("#idFileList").append('<tr>' +
+												'<td>' + file.name +  '</td>' +
+					 							'<td>' + file.contentLength + '</td>' +
+					 							'<td>' + file.created + '</td>' +
+					 							'<td>heatedline</td>' +
+					 							'<td> <button type="button" class="btn btn-primary" onclick="openPDFModal(' + file.id + ')">Open</button> </td>' +
+					 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
+												'</tr>');
+										var btn = document.getElementById("idDownloadBtn" + index);
+						    			btn.addEventListener("click", function() { 
+						    				downloadFile(files[index])
+						    			});
+									} else if(file.mimeType == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
+										$("#idFileList").append('<tr>' +
+												'<td>' + file.name +  '</td>' +
+					 							'<td>' + file.contentLength + '</td>' +
+					 							'<td>' + file.created + '</td>' +
+					 							'<td>heatedline</td>' +
+					 							'<td>NA</td>' +
+					 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
+												'</tr>');
+										var btn = document.getElementById("idDownloadBtn" + index);
+						    			btn.addEventListener("click", function() { 
+						    				downloadFile(files[index])
+						    			});
 									}
 								});
 								
@@ -170,28 +290,85 @@ $(document).ready(function() {
 						$("#idFileList").empty();
 						$.each(files, function (index, file) {
 							var type;
-							if(file.mimeType == "audio/mp3") {
+							if(file.mimeType == "audio/mp3" || file.mimeType == "audio/mpeg") {
 								type = "audio/mpeg";
 								$("#idFileList").append('<tr>' +
 										'<td>' + file.name +  '</td>' +
 			 							'<td>' + file.contentLength + '</td>' +
 			 							'<td>' + file.created + '</td>' +
+			 							'<td>heatedline</td>' +
 			 							'<td> <audio controls><source src=' + serviceIP + 'audioVideoFiles/' + file.id + ' type=' + type + '></audio> </td>' +
+			 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
 										'</tr>');
+								var btn = document.getElementById("idDownloadBtn" + index);
+				    			btn.addEventListener("click", function() { 
+				    				downloadFile(files[index])
+				    			});
 							} else if(file.mimeType == "video/mp4"){
 								$("#idFileList").append('<tr>' +
 										'<td>' + file.name +  '</td>' +
 			 							'<td>' + file.contentLength + '</td>' +
 			 							'<td>' + file.created + '</td>' +
+			 							'<td>heatedline</td>' +
 			 							'<td> <a onclick="playVideo('+ file.id + ')" class="anchorButton" data-toggle="modal" data-target="#videoModal">&#9658;</a> </td>' +
+			 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
 										'</tr>');
-							} else {
+								var btn = document.getElementById("idDownloadBtn" + index);
+				    			btn.addEventListener("click", function() { 
+				    				downloadFile(files[index])
+				    			});
+							} else if(file.mimeType == "application/pdf") {
 								$("#idFileList").append('<tr>' +
 										'<td>' + file.name +  '</td>' +
 			 							'<td>' + file.contentLength + '</td>' +
 			 							'<td>' + file.created + '</td>' +
-			 							'<td> NA </td>' +
+			 							'<td>heatedline</td>' +
+			 							'<td> <button type="button" class="btn btn-primary" onclick="openPDFModal(' + file.id + ')">Open</button> </td>' +
+			 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
 										'</tr>');
+								var btn = document.getElementById("idDownloadBtn" + index);
+				    			btn.addEventListener("click", function() { 
+				    				downloadFile(files[index])
+				    			});
+							} else if(file.mimeType == "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
+								$("#idFileList").append('<tr>' +
+										'<td>' + file.name +  '</td>' +
+			 							'<td>' + file.contentLength + '</td>' +
+			 							'<td>' + file.created + '</td>' +
+			 							'<td>heatedline</td>' +
+			 							'<td> <button type="button" class="btn btn-primary" onclick="openDocModal(' + file.id + ')">Open</button> </td>' +
+			 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
+										'</tr>');
+								var btn = document.getElementById("idDownloadBtn" + index);
+				    			btn.addEventListener("click", function() { 
+				    				downloadFile(files[index])
+				    			});
+							} else if(file.mimeType == "text/plain") {
+								$("#idFileList").append('<tr>' +
+										'<td>' + file.name +  '</td>' +
+			 							'<td>' + file.contentLength + '</td>' +
+			 							'<td>' + file.created + '</td>' +
+			 							'<td>heatedline</td>' +
+			 							'<td> <button type="button" class="btn btn-primary" onclick="openPDFModal(' + file.id + ')">Open</button> </td>' +
+			 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
+										'</tr>');
+								var btn = document.getElementById("idDownloadBtn" + index);
+				    			btn.addEventListener("click", function() { 
+				    				downloadFile(files[index])
+				    			});
+							} else if(file.mimeType == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
+								$("#idFileList").append('<tr>' +
+										'<td>' + file.name +  '</td>' +
+			 							'<td>' + file.contentLength + '</td>' +
+			 							'<td>' + file.created + '</td>' +
+			 							'<td>heatedline</td>' +
+			 							'<td>NA</td>' +
+			 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
+										'</tr>');
+								var btn = document.getElementById("idDownloadBtn" + index);
+				    			btn.addEventListener("click", function() { 
+				    				downloadFile(files[index])
+				    			});
 							}
 						});
 						
@@ -252,7 +429,57 @@ function playVideo(id) {
 	  '</video>').appendTo("#idVideoModalBody");
 }
 
+function openPDFModal(id) {
+	var w = window.open('', 'wnd');
+	PDFObject.embed(serviceIP + "pdfFiles/" + id, w.document.body);
+}
+
 function openDocModal(id) {
-	$("#idDocModalBody").html('');
-	PDFObject.embed(serviceIP + "documentFiles/" + id, "#idDocModalBody");
+	var w = window.open('', 'wnd');
+	PDFObject.embed(serviceIP + "renderToPDF?fileId=" + id, w.document.body);
+}
+
+function downloadFile(file) {
+	var downloadURL = serviceIP + "getContent/" + file.id;
+	var a = document.createElement("a");
+	document.body.appendChild(a);
+	a.style = "display: none";
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", downloadURL, true);
+	xhr.responseType = "blob";
+	xhr.onload = function() {
+		if (xhr.status == 401) {
+			bootbox.alert({
+				message : "You are not authenticated",
+				callback : function() {
+					window.location = "../index.html";
+				}
+			})
+		} else if (xhr.status == 403) {
+			msg = 'you don’t have permission to access ‘/’ on this server.';
+			//alert(msg);
+		} else if (xhr.status === 200) {
+			//Download start
+			// IE
+			if (window.navigator.msSaveOrOpenBlob) {
+				console.log("IE")
+				var blob = new Blob([ xhr.response ], {
+					type : 'application/vnd.ms-word'
+				});
+				window.navigator.msSaveOrOpenBlob(blob, file.name);
+
+				a.click();
+			} else //Chrome and safari
+			{
+				console.log("Chrome and safari")
+				var url = window.URL.createObjectURL(xhr.response);
+				a.href = url;
+				a.download = file.name;
+				a.click();
+				window.URL.revokeObjectURL(url);
+			}
+		}
+		//Download End
+	};
+	xhr.send();
 }

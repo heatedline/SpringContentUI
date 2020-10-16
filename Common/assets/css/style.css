@@ -99,7 +99,11 @@ img {
 	width: 150px;
 }
 
-.pdfobject-container {
+/* .pdfobject-container {
 	height: 30rem;
 	border: 1rem solid rgba(0, 0, 0, .1);
+} */
+
+.modalxl{
+    max-width: calc(90vw - 2px);
 }

@@ -11,9 +11,6 @@
 
 <link rel="stylesheet" href="Common/assets/css/style.css">
 <link rel="stylesheet" href="Common/assets/css/search.css">
-<!-- <link href="Common/assets/css/fileinput.css" media="all" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
-<link href="Common/assets/theme/explorer-fas/theme.css" media="all" rel="stylesheet" type="text/css"> -->
 <title>Spring Content With Apache Solr</title>
 </head>
 <body>
@@ -56,19 +53,21 @@
 		</form>
 	</div>
 
-	<!-- <img id="idImage" src="http://localhost:8080/springContent/renderToImage?fileId=9"/> -->
 	<table width="100%" class="table table-hover">
 		<thead>
 			<tr>
 				<th>Name</th>
 				<th>Length</th>
 				<th>Created</th>
-				<th>Play/Pause</th>
+				<th>Uploaded By</th>
+				<th>Play/Pause/Open</th>
+				<th>Download</th>
 			</tr>
 		</thead>
 		<tbody id="idFileList">
 		</tbody>
 	</table>
+	
 
 	<!-- Video Modal -->
 	<div class="modal fade" id="videoModal" tabindex="-1" role="dialog"
@@ -93,7 +92,7 @@
 	<!-- Document Modal -->
 	<div class="modal fade" id="docModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog modalxl" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h4 class="modal-title" id="myModalLabel">Document</h4>
@@ -122,13 +121,6 @@
 	<script type="text/javascript" src="jquery.serializeToJSON.js"></script>
 	<script type="text/javascript"
 		src="Common/assets/js/mySpringContent_global.js"></script>
-	<!-- <script type="text/javascript" src="Common/assets/js-library/jquery.dropbox.js"></script> -->
-	<!-- <script type="text/javascript" src="Common/assets/js-library/plugins/piexif.js"></script>
-	<script type="text/javascript" src="Common/assets/js-library/plugins/purify.js"></script>
-	<script type="text/javascript" src="Common/assets/js-library/plugins/sortable.js"></script>
-	<script type="text/javascript" src="Common/assets/js-library/fileinput.js"></script>
-	<script type="text/javascript" src="Common/assets/theme/fas/theme.js"></script>
-	<script type="text/javascript" src="Common/assets/theme/explorer-fas/theme.js"></script> -->
 	<script type="text/javascript"
 		src="Common/assets/js-library/plupload.full.min.js"></script>
 	<script type="text/javascript"
