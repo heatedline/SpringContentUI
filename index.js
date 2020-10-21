@@ -32,7 +32,7 @@ $(document).ready(function() {
 							'<td>' + file.name +  '</td>' +
  							'<td>' + file.contentLength + '</td>' +
  							'<td>' + file.created + '</td>' +
- 							'<td>heatedline</td>' +
+ 							'<td>' + file.uploadedBy + '</td>' +
  							'<td> <audio controls><source src=' + serviceIP + 'audioVideoFiles/' + file.id + ' type=' + type + '></audio> </td>' +
  							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
 							'</tr>');
@@ -45,7 +45,7 @@ $(document).ready(function() {
 							'<td>' + file.name +  '</td>' +
  							'<td>' + file.contentLength + '</td>' +
  							'<td>' + file.created + '</td>' +
- 							'<td>heatedline</td>' +
+ 							'<td>' + file.uploadedBy + '</td>' +
  							'<td> <a onclick="playVideo('+ file.id + ')" class="anchorButton" data-toggle="modal" data-target="#videoModal">&#9658;</a> </td>' +
  							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
 							'</tr>');
@@ -58,7 +58,7 @@ $(document).ready(function() {
 							'<td>' + file.name +  '</td>' +
  							'<td>' + file.contentLength + '</td>' +
  							'<td>' + file.created + '</td>' +
- 							'<td>heatedline</td>' +
+ 							'<td>' + file.uploadedBy + '</td>' +
  							'<td> <button type="button" class="btn btn-primary" onclick="openPDFModal(' + file.id + ')">Open</button> </td>' +
  							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
 							'</tr>');
@@ -71,7 +71,7 @@ $(document).ready(function() {
 							'<td>' + file.name +  '</td>' +
  							'<td>' + file.contentLength + '</td>' +
  							'<td>' + file.created + '</td>' +
- 							'<td>heatedline</td>' +
+ 							'<td>' + file.uploadedBy + '</td>' +
  							'<td> <button type="button" class="btn btn-primary" onclick="openDocModal(' + file.id + ')">Open</button> </td>' +
  							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
 							'</tr>');
@@ -84,7 +84,7 @@ $(document).ready(function() {
 							'<td>' + file.name +  '</td>' +
  							'<td>' + file.contentLength + '</td>' +
  							'<td>' + file.created + '</td>' +
- 							'<td>heatedline</td>' +
+ 							'<td>' + file.uploadedBy + '</td>' +
  							'<td> <button type="button" class="btn btn-primary" onclick="openPDFModal(' + file.id + ')">Open</button> </td>' +
  							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
 							'</tr>');
@@ -97,7 +97,7 @@ $(document).ready(function() {
 							'<td>' + file.name +  '</td>' +
  							'<td>' + file.contentLength + '</td>' +
  							'<td>' + file.created + '</td>' +
- 							'<td>heatedline</td>' +
+ 							'<td>' + file.uploadedBy + '</td>' +
  							'<td>NA</td>' +
  							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
 							'</tr>');
@@ -131,7 +131,8 @@ $(document).ready(function() {
 
 		var f = $('input[type=file]')[0].files[0];
 		var file = {
-			name : f.name
+			name : f.name,
+			uploadedBy : "heatedline"
 		};
 
 		var fileData = JSON.stringify(file);
@@ -176,7 +177,7 @@ $(document).ready(function() {
 												'<td>' + file.name +  '</td>' +
 					 							'<td>' + file.contentLength + '</td>' +
 					 							'<td>' + file.created + '</td>' +
-					 							'<td>heatedline</td>' +
+					 							'<td>' + file.uploadedBy + '</td>' +
 					 							'<td> <audio controls><source src=' + serviceIP + 'audioVideoFiles/' + file.id + ' type=' + type + '></audio> </td>' +
 					 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
 												'</tr>');
@@ -189,7 +190,7 @@ $(document).ready(function() {
 												'<td>' + file.name +  '</td>' +
 					 							'<td>' + file.contentLength + '</td>' +
 					 							'<td>' + file.created + '</td>' +
-					 							'<td>heatedline</td>' +
+					 							'<td>' + file.uploadedBy + '</td>' +
 					 							'<td> <a onclick="playVideo('+ file.id + ')" class="anchorButton" data-toggle="modal" data-target="#videoModal">&#9658;</a> </td>' +
 					 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
 												'</tr>');
@@ -202,7 +203,7 @@ $(document).ready(function() {
 												'<td>' + file.name +  '</td>' +
 					 							'<td>' + file.contentLength + '</td>' +
 					 							'<td>' + file.created + '</td>' +
-					 							'<td>heatedline</td>' +
+					 							'<td>' + file.uploadedBy + '</td>' +
 					 							'<td> <button type="button" class="btn btn-primary" onclick="openPDFModal(' + file.id + ')">Open</button> </td>' +
 					 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
 												'</tr>');
@@ -215,7 +216,7 @@ $(document).ready(function() {
 												'<td>' + file.name +  '</td>' +
 					 							'<td>' + file.contentLength + '</td>' +
 					 							'<td>' + file.created + '</td>' +
-					 							'<td>heatedline</td>' +
+					 							'<td>' + file.uploadedBy + '</td>' +
 					 							'<td> <button type="button" class="btn btn-primary" onclick="openDocModal(' + file.id + ')">Open</button> </td>' +
 					 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
 												'</tr>');
@@ -228,7 +229,7 @@ $(document).ready(function() {
 												'<td>' + file.name +  '</td>' +
 					 							'<td>' + file.contentLength + '</td>' +
 					 							'<td>' + file.created + '</td>' +
-					 							'<td>heatedline</td>' +
+					 							'<td>' + file.uploadedBy + '</td>' +
 					 							'<td> <button type="button" class="btn btn-primary" onclick="openPDFModal(' + file.id + ')">Open</button> </td>' +
 					 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
 												'</tr>');
@@ -241,7 +242,7 @@ $(document).ready(function() {
 												'<td>' + file.name +  '</td>' +
 					 							'<td>' + file.contentLength + '</td>' +
 					 							'<td>' + file.created + '</td>' +
-					 							'<td>heatedline</td>' +
+					 							'<td>' + file.uploadedBy + '</td>' +
 					 							'<td>NA</td>' +
 					 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
 												'</tr>');
@@ -296,7 +297,7 @@ $(document).ready(function() {
 										'<td>' + file.name +  '</td>' +
 			 							'<td>' + file.contentLength + '</td>' +
 			 							'<td>' + file.created + '</td>' +
-			 							'<td>heatedline</td>' +
+			 							'<td>' + file.uploadedBy + '</td>' +
 			 							'<td> <audio controls><source src=' + serviceIP + 'audioVideoFiles/' + file.id + ' type=' + type + '></audio> </td>' +
 			 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
 										'</tr>');
@@ -309,7 +310,7 @@ $(document).ready(function() {
 										'<td>' + file.name +  '</td>' +
 			 							'<td>' + file.contentLength + '</td>' +
 			 							'<td>' + file.created + '</td>' +
-			 							'<td>heatedline</td>' +
+			 							'<td>' + file.uploadedBy + '</td>' +
 			 							'<td> <a onclick="playVideo('+ file.id + ')" class="anchorButton" data-toggle="modal" data-target="#videoModal">&#9658;</a> </td>' +
 			 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
 										'</tr>');
@@ -322,7 +323,7 @@ $(document).ready(function() {
 										'<td>' + file.name +  '</td>' +
 			 							'<td>' + file.contentLength + '</td>' +
 			 							'<td>' + file.created + '</td>' +
-			 							'<td>heatedline</td>' +
+			 							'<td>' + file.uploadedBy + '</td>' +
 			 							'<td> <button type="button" class="btn btn-primary" onclick="openPDFModal(' + file.id + ')">Open</button> </td>' +
 			 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
 										'</tr>');
@@ -335,7 +336,7 @@ $(document).ready(function() {
 										'<td>' + file.name +  '</td>' +
 			 							'<td>' + file.contentLength + '</td>' +
 			 							'<td>' + file.created + '</td>' +
-			 							'<td>heatedline</td>' +
+			 							'<td>' + file.uploadedBy + '</td>' +
 			 							'<td> <button type="button" class="btn btn-primary" onclick="openDocModal(' + file.id + ')">Open</button> </td>' +
 			 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
 										'</tr>');
@@ -348,7 +349,7 @@ $(document).ready(function() {
 										'<td>' + file.name +  '</td>' +
 			 							'<td>' + file.contentLength + '</td>' +
 			 							'<td>' + file.created + '</td>' +
-			 							'<td>heatedline</td>' +
+			 							'<td>' + file.uploadedBy + '</td>' +
 			 							'<td> <button type="button" class="btn btn-primary" onclick="openPDFModal(' + file.id + ')">Open</button> </td>' +
 			 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
 										'</tr>');
@@ -361,7 +362,7 @@ $(document).ready(function() {
 										'<td>' + file.name +  '</td>' +
 			 							'<td>' + file.contentLength + '</td>' +
 			 							'<td>' + file.created + '</td>' +
-			 							'<td>heatedline</td>' +
+			 							'<td>' + file.uploadedBy + '</td>' +
 			 							'<td>NA</td>' +
 			 							'<td><button type="button" class="btn btn-primary" id="idDownloadBtn' + index +'">Download</button></td>' +
 										'</tr>');
